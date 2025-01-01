@@ -1,5 +1,6 @@
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Category } from "./CategoryFilter";
+import { useNavigate } from "react-router-dom";
 
 export interface Listing {
   id: string;
@@ -16,8 +17,13 @@ interface ListingCardProps {
 }
 
 export function ListingCard({ listing }: ListingCardProps) {
+  const navigate = useNavigate();
+
   return (
-    <Card className="overflow-hidden transition-all hover:shadow-lg">
+    <Card 
+      className="overflow-hidden transition-all hover:shadow-lg cursor-pointer"
+      onClick={() => navigate(`/listing/${listing.id}`)}
+    >
       <CardHeader className="p-0">
         <img
           src={listing.image}

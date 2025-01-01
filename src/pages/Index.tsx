@@ -7,56 +7,53 @@ import { Button } from "@/components/ui/button";
 import { UserCircle2, Moon, Sun, Heart, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import logo from "@/assets/logo-gmk.svg";
+import { Progress } from "@/components/ui/progress";
+import { LoginDialog } from "@/components/auth/LoginDialog";
+import { RegisterDialog } from "@/components/auth/RegisterDialog";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category>("All");
-  const [theme, setTheme] = useState<"light" | "dark">("light");
   const [listings, setListings] = useState<Listing[]>([
     {
       id: "1",
-      title: "Homemade Chocolate Cake",
-      description: "Delicious chocolate cake made with organic ingredients. Perfect for office celebrations!",
-      price: 25,
+      title: "Vietnamese Coffee Pack",
+      description: "Premium Vietnamese coffee beans, freshly roasted and ground.",
+      price: 150,
       category: "Food",
-      image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587",
+      image: "https://images.unsplash.com/photo-1459755486867-b55449bb39ff",
       createdAt: new Date("2024-02-15"),
     },
     {
       id: "2",
-      title: "Fresh Fruit Platter",
-      description: "Seasonal fruits arranged beautifully. Great for team meetings!",
-      price: 35,
-      category: "Food",
-      image: "https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea",
+      title: "Handcrafted Tea Set",
+      description: "Traditional ceramic tea set with four cups and a teapot.",
+      price: 280,
+      category: "Other",
+      image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc",
       createdAt: new Date("2024-02-16"),
     },
     {
       id: "3",
-      title: "Homemade Pasta Lunch",
-      description: "Fresh pasta with homemade sauce. Available for lunch delivery to the office.",
-      price: 15,
-      category: "Food",
-      image: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601",
+      title: "Bamboo Desk Set",
+      description: "Eco-friendly desk organizer set made from sustainable bamboo.",
+      price: 180,
+      category: "Office Supplies",
+      image: "https://images.unsplash.com/photo-1544457070-4cd773b4d71e",
       createdAt: new Date("2024-02-17"),
+    },
+    {
+      id: "4",
+      title: "Organic Tea Collection",
+      description: "Selection of premium organic teas from Vietnamese highlands.",
+      price: 220,
+      category: "Food",
+      image: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9",
+      createdAt: new Date("2024-02-18"),
     },
   ]);
   const { toast } = useToast();
-
-  useEffect(() => {
-    // Check if user has a theme preference
-    const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
-    if (savedTheme) {
-      setTheme(savedTheme);
-      document.documentElement.classList.toggle("dark", savedTheme === "dark");
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-    document.documentElement.classList.toggle("dark");
-  };
 
   const handleCreateListing = (newListing: Omit<Listing, "id" | "createdAt">) => {
     const listing: Listing = {
@@ -78,46 +75,14 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background p-4 transition-colors duration-200 flex flex-col">
       <div className="mx-auto max-w-7xl flex-grow">
-        <div className="mb-8 flex items-center justify-between">
-          <img src={logo} alt="Green Market Logo" className="h-12 w-auto" />
-          
-          <div className="flex-1 max-w-md mx-8">
-            <div className="relative">
-              <Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-              <Input
-                placeholder="Search listings..."
-                className="pl-8"
-              />
-            </div>
+        <Header />
+        
+        <div className="mb-6 flex items-center gap-4">
+          <span className="text-sm font-medium">Charity goal</span>
+          <div className="flex-1">
+            <Progress value={35} className="h-2 bg-gray-200" />
           </div>
-
-          <div className="flex items-center gap-4">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={toggleTheme}
-              className="h-10 w-10 hover:text-white"
-            >
-              {theme === "light" ? (
-                <Moon className="h-4 w-4" />
-              ) : (
-                <Sun className="h-4 w-4" />
-              )}
-            </Button>
-            <CreateListingDialog onCreateListing={handleCreateListing}>
-              <Button className="gap-2 bg-green-600 hover:bg-green-700">
-                Start selling
-              </Button>
-            </CreateListingDialog>
-            <div className="flex gap-2">
-              <Button variant="outline" className="hover:text-white">
-                Login
-              </Button>
-              <Button variant="outline" className="hover:text-white">
-                Register
-              </Button>
-            </div>
-          </div>
+          <span className="text-sm font-medium text-[#1E7B3E]">35%</span>
         </div>
 
         <CategoryFilter
@@ -139,9 +104,7 @@ const Index = () => {
           </div>
         )}
       </div>
-      <footer className="mt-8 text-center text-xs text-muted-foreground">
-        Made with <Heart className="inline h-3 w-3 text-red-500" /> from NashTech Green Market Team
-      </footer>
+      <Footer />
     </div>
   );
 };
