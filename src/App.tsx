@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import ListingDetail from "./pages/ListingDetail";
 import { ThemeProvider } from '@/contexts/ThemeContext';
+import Donations from "./pages/Donations";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/listing/:id" element={<ListingDetail />} />
+            <Route path="/donations" element={<Donations />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

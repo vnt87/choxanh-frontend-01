@@ -1,5 +1,5 @@
 import { Moon, Sun, Search } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CreateListingDialog } from "@/components/CreateListingDialog";
@@ -9,6 +9,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 
 export function Header() {
   const { theme, toggleTheme } = useTheme();
+  const location = useLocation();
 
   return (
     <header className="mb-8 flex items-center justify-between">
@@ -16,8 +17,31 @@ export function Header() {
         <img src={logo} alt="Green Market Logo" className="h-12 w-auto" />
       </Link>
       
-      <div className="flex-1 max-w-md mx-8">
-        <div className="relative">
+      <div className="flex items-center gap-8 flex-1 max-w-3xl mx-8">
+        <nav className="flex gap-4">
+          <Link
+            to="/"
+            className={`px-3 py-2 text-sm font-medium rounded-md ${
+              location.pathname === "/" 
+                ? "bg-secondary text-secondary-foreground" 
+                : "text-muted-foreground hover:text-primary"
+            }`}
+          >
+            Shopping
+          </Link>
+          <Link
+            to="/donations"
+            className={`px-3 py-2 text-sm font-medium rounded-md ${
+              location.pathname === "/donations"
+                ? "bg-secondary text-secondary-foreground"
+                : "text-muted-foreground hover:text-primary"
+            }`}
+          >
+            Donations
+          </Link>
+        </nav>
+        
+        <div className="relative flex-1">
           <Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             placeholder="Search listings..."

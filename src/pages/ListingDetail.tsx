@@ -12,14 +12,12 @@ export default function ListingDetail() {
         <Header />
         
         <nav className="mb-6">
-          <ol className="flex items-center space-x-2 text-sm text-gray-500">
+          <ol className="flex items-center space-x-2 text-sm">
             <li>
-              <Link to="/" className="hover:text-gray-700">Home</Link>
+              <Link to="/" className="text-muted-foreground hover:text-primary">Home</Link>
             </li>
-            <li>&gt;</li>
-            <li>
-              <span className="text-gray-900">Vietnamese Coffee Pack</span>
-            </li>
+            <li className="text-muted-foreground">&gt;</li>
+            <li className="text-foreground font-medium">Vietnamese Coffee Pack</li>
           </ol>
         </nav>
 
@@ -34,7 +32,7 @@ export default function ListingDetail() {
               <h1 className="text-3xl font-bold">Vietnamese Coffee Pack</h1>
               <p className="text-2xl font-semibold text-[#1E7B3E] mt-2">150k</p>
             </div>
-            <p className="text-gray-600">
+            <p className="text-muted-foreground">
               Premium Vietnamese coffee beans, freshly roasted and ground.
             </p>
             <Button className="w-full bg-[#1E7B3E] hover:bg-[#1E7B3E]/90">

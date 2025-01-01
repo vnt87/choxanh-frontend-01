@@ -38,12 +38,12 @@ export function ListingCard({ listing }: ListingCardProps) {
             {listing.price}k
           </span>
         </div>
-        <p className="mt-2 text-sm text-gray-600 line-clamp-2">
+        <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
           {listing.description}
         </p>
       </CardContent>
       <CardFooter className="p-4 pt-0">
-        <span className="text-xs text-gray-500">
+        <span className="text-xs text-muted-foreground">
           Posted {listing.createdAt.toLocaleDateString()}
         </span>
       </CardFooter>

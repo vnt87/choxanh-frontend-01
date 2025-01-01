@@ -12,6 +12,7 @@ import { LoginDialog } from "@/components/auth/LoginDialog";
 import { RegisterDialog } from "@/components/auth/RegisterDialog";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { CharityProgress } from "@/components/CharityProgress";
 
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category>("All");
@@ -76,15 +77,7 @@ const Index = () => {
     <div className="min-h-screen bg-background p-4 transition-colors duration-200 flex flex-col">
       <div className="mx-auto max-w-7xl flex-grow">
         <Header />
-        
-        <div className="mb-6 flex items-center gap-4">
-          <span className="text-sm font-medium">Charity goal</span>
-          <div className="flex-1">
-            <Progress value={35} className="h-2 bg-gray-200" />
-          </div>
-          <span className="text-sm font-medium text-[#1E7B3E]">35%</span>
-        </div>
-
+        <CharityProgress />
         <CategoryFilter
           selectedCategory={selectedCategory}
           onSelectCategory={setSelectedCategory}
