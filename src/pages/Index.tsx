@@ -4,7 +4,7 @@ import { CategoryFilter, Category } from "@/components/CategoryFilter";
 import { ListingCard, type Listing } from "@/components/ListingCard";
 import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
-import { UserCircle2, Moon, Sun } from "lucide-react";
+import { UserCircle2, Moon, Sun, Heart } from "lucide-react";
 
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category>("All");
@@ -74,8 +74,8 @@ const Index = () => {
   );
 
   return (
-    <div className="min-h-screen bg-background p-4 transition-colors duration-200">
-      <div className="mx-auto max-w-7xl">
+    <div className="min-h-screen bg-background p-4 transition-colors duration-200 flex flex-col">
+      <div className="mx-auto max-w-7xl flex-grow">
         <div className="mb-8 flex items-center justify-between">
           <h1 className="text-3xl font-bold text-foreground">Green Market</h1>
           <div className="flex items-center gap-4">
@@ -122,6 +122,9 @@ const Index = () => {
           </div>
         )}
       </div>
+      <footer className="mt-8 text-center text-xs text-muted-foreground">
+        Made with <Heart className="inline h-3 w-3 text-red-500" /> from NashTech Green Market Team
+      </footer>
     </div>
   );
 };
