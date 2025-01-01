@@ -6,6 +6,7 @@ export const categories = [
   "Electronics",
   "Furniture",
   "Books",
+  "Food",
   "Office Supplies",
   "Other",
 ] as const;
