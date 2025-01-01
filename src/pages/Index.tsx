@@ -75,7 +75,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background p-4 transition-colors duration-200 flex flex-col">
-      <div className="mx-auto max-w-7xl flex-grow">
+      <div className="mx-auto max-w-7xl flex-grow w-full">
         <Header />
         <CharityProgress />
         <CategoryFilter
@@ -83,19 +83,21 @@ const Index = () => {
           onSelectCategory={setSelectedCategory}
         />
 
-        {filteredListings.length === 0 ? (
-          <div className="mt-8 text-center">
-            <p className="text-gray-600 dark:text-gray-400">
-              No listings found. Be the first to create one!
-            </p>
-          </div>
-        ) : (
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {filteredListings.map((listing) => (
-              <ListingCard key={listing.id} listing={listing} />
-            ))}
-          </div>
-        )}
+        <div className="mt-8 w-full">
+          {filteredListings.length === 0 ? (
+            <div className="text-center p-8">
+              <p className="text-gray-600 dark:text-gray-400">
+                No listings found. Be the first to create one!
+              </p>
+            </div>
+          ) : (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {filteredListings.map((listing) => (
+                <ListingCard key={listing.id} listing={listing} />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
       <Footer />
     </div>
