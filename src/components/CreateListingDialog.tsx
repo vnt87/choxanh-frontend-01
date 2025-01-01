@@ -6,7 +6,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { categories, Category } from "./CategoryFilter";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { PlusCircle } from "lucide-react";
 
 interface CreateListingDialogProps {
   onCreateListing: (listing: {
@@ -16,9 +15,10 @@ interface CreateListingDialogProps {
     category: Category;
     image: string;
   }) => void;
+  children: React.ReactNode;
 }
 
-export function CreateListingDialog({ onCreateListing }: CreateListingDialogProps) {
+export function CreateListingDialog({ onCreateListing, children }: CreateListingDialogProps) {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -46,10 +46,7 @@ export function CreateListingDialog({ onCreateListing }: CreateListingDialogProp
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="gap-2 bg-marketplace-600 hover:bg-marketplace-700">
-          <PlusCircle className="h-4 w-4" />
-          Create Listing
-        </Button>
+        {children}
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -111,7 +108,7 @@ export function CreateListingDialog({ onCreateListing }: CreateListingDialogProp
               placeholder="https://example.com/image.jpg"
             />
           </div>
-          <Button type="submit" className="w-full bg-marketplace-600 hover:bg-marketplace-700">
+          <Button type="submit" className="w-full bg-green-600 hover:bg-green-700">
             Create Listing
           </Button>
         </form>

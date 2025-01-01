@@ -3,10 +3,40 @@ import { CreateListingDialog } from "@/components/CreateListingDialog";
 import { CategoryFilter, Category } from "@/components/CategoryFilter";
 import { ListingCard, type Listing } from "@/components/ListingCard";
 import { useToast } from "@/components/ui/use-toast";
+import { Button } from "@/components/ui/button";
+import { UserCircle2 } from "lucide-react";
 
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category>("All");
-  const [listings, setListings] = useState<Listing[]>([]);
+  const [listings, setListings] = useState<Listing[]>([
+    {
+      id: "1",
+      title: "Homemade Chocolate Cake",
+      description: "Delicious chocolate cake made with organic ingredients. Perfect for office celebrations!",
+      price: 25,
+      category: "Food",
+      image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587",
+      createdAt: new Date("2024-02-15"),
+    },
+    {
+      id: "2",
+      title: "Fresh Fruit Platter",
+      description: "Seasonal fruits arranged beautifully. Great for team meetings!",
+      price: 35,
+      category: "Food",
+      image: "https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea",
+      createdAt: new Date("2024-02-16"),
+    },
+    {
+      id: "3",
+      title: "Homemade Pasta Lunch",
+      description: "Fresh pasta with homemade sauce. Available for lunch delivery to the office.",
+      price: 15,
+      category: "Food",
+      image: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601",
+      createdAt: new Date("2024-02-17"),
+    },
+  ]);
   const { toast } = useToast();
 
   const handleCreateListing = (newListing: Omit<Listing, "id" | "createdAt">) => {
@@ -30,10 +60,18 @@ const Index = () => {
     <div className="min-h-screen bg-gray-50 p-4">
       <div className="mx-auto max-w-7xl">
         <div className="mb-8 flex items-center justify-between">
-          <h1 className="text-3xl font-bold text-gray-900">
-            Company Marketplace
-          </h1>
-          <CreateListingDialog onCreateListing={handleCreateListing} />
+          <h1 className="text-3xl font-bold text-gray-900">Green Market</h1>
+          <div className="flex items-center gap-4">
+            <CreateListingDialog onCreateListing={handleCreateListing}>
+              <Button className="gap-2 bg-green-600 hover:bg-green-700">
+                Start selling
+              </Button>
+            </CreateListingDialog>
+            <Button variant="outline" className="gap-2">
+              <UserCircle2 className="h-4 w-4" />
+              Login / Register
+            </Button>
+          </div>
         </div>
 
         <CategoryFilter
