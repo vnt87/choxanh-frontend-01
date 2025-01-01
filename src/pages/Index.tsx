@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CreateListingDialog } from "@/components/CreateListingDialog";
 import { CategoryFilter, Category } from "@/components/CategoryFilter";
 import { ListingCard, type Listing } from "@/components/ListingCard";
 import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
-import { UserCircle2 } from "lucide-react";
+import { UserCircle2, Moon, Sun } from "lucide-react";
 
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category>("All");
+  const [theme, setTheme] = useState<"light" | "dark">("light");
   const [listings, setListings] = useState<Listing[]>([
     {
       id: "1",
@@ -39,6 +40,22 @@ const Index = () => {
   ]);
   const { toast } = useToast();
 
+  useEffect(() => {
+    // Check if user has a theme preference
+    const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
+    if (savedTheme) {
+      setTheme(savedTheme);
+      document.documentElement.classList.toggle("dark", savedTheme === "dark");
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.classList.toggle("dark");
+  };
+
   const handleCreateListing = (newListing: Omit<Listing, "id" | "createdAt">) => {
     const listing: Listing = {
       ...newListing,
@@ -57,11 +74,23 @@ const Index = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
+    <div className="min-h-screen bg-background p-4 transition-colors duration-200">
       <div className="mx-auto max-w-7xl">
         <div className="mb-8 flex items-center justify-between">
-          <h1 className="text-3xl font-bold text-gray-900">Green Market</h1>
+          <h1 className="text-3xl font-bold text-foreground">Green Market</h1>
           <div className="flex items-center gap-4">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={toggleTheme}
+              className="h-10 w-10"
+            >
+              {theme === "light" ? (
+                <Moon className="h-4 w-4" />
+              ) : (
+                <Sun className="h-4 w-4" />
+              )}
+            </Button>
             <CreateListingDialog onCreateListing={handleCreateListing}>
               <Button className="gap-2 bg-green-600 hover:bg-green-700">
                 Start selling
@@ -81,7 +110,7 @@ const Index = () => {
 
         {filteredListings.length === 0 ? (
           <div className="mt-8 text-center">
-            <p className="text-gray-600">
+            <p className="text-gray-600 dark:text-gray-400">
               No listings found. Be the first to create one!
             </p>
           </div>
