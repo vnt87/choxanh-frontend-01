@@ -29,7 +29,7 @@ export function ListingCard({ listing }: ListingCardProps) {
         <div className="flex items-start justify-between gap-2">
           <h3 className="font-semibold line-clamp-1">{listing.title}</h3>
           <span className="whitespace-nowrap font-medium text-marketplace-600">
-            ${listing.price}
+            {listing.price}k
           </span>
         </div>
         <p className="mt-2 text-sm text-gray-600 line-clamp-2">

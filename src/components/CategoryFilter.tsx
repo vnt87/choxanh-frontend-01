@@ -30,9 +30,9 @@ export function CategoryFilter({
           variant="outline"
           size="sm"
           className={cn(
-            "rounded-full",
+            "rounded-full hover:text-white",
             selectedCategory === category &&
-              "bg-marketplace-600 text-white hover:bg-marketplace-700"
+              "bg-[#1E7B3E] text-white hover:bg-[#1E7B3E]/90"
           )}
           onClick={() => onSelectCategory(category)}
         >

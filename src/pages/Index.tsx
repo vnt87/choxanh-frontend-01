@@ -4,7 +4,9 @@ import { CategoryFilter, Category } from "@/components/CategoryFilter";
 import { ListingCard, type Listing } from "@/components/ListingCard";
 import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
-import { UserCircle2, Moon, Sun, Heart } from "lucide-react";
+import { UserCircle2, Moon, Sun, Heart, Search } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import logo from "@/assets/logo-gmk.svg";
 
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category>("All");
@@ -77,13 +79,24 @@ const Index = () => {
     <div className="min-h-screen bg-background p-4 transition-colors duration-200 flex flex-col">
       <div className="mx-auto max-w-7xl flex-grow">
         <div className="mb-8 flex items-center justify-between">
-          <h1 className="text-3xl font-bold text-foreground">Green Market</h1>
+          <img src={logo} alt="Green Market Logo" className="h-12 w-auto" />
+          
+          <div className="flex-1 max-w-md mx-8">
+            <div className="relative">
+              <Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Input
+                placeholder="Search listings..."
+                className="pl-8"
+              />
+            </div>
+          </div>
+
           <div className="flex items-center gap-4">
             <Button
               variant="outline"
               size="icon"
               onClick={toggleTheme}
-              className="h-10 w-10"
+              className="h-10 w-10 hover:text-white"
             >
               {theme === "light" ? (
                 <Moon className="h-4 w-4" />
@@ -96,10 +109,14 @@ const Index = () => {
                 Start selling
               </Button>
             </CreateListingDialog>
-            <Button variant="outline" className="gap-2">
-              <UserCircle2 className="h-4 w-4" />
-              Login / Register
-            </Button>
+            <div className="flex gap-2">
+              <Button variant="outline" className="hover:text-white">
+                Login
+              </Button>
+              <Button variant="outline" className="hover:text-white">
+                Register
+              </Button>
+            </div>
           </div>
         </div>
 
