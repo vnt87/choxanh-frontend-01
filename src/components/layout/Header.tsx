@@ -82,16 +82,16 @@ export function Header() {
             )}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="gap-2">
+                <Button variant="outline" className="gap-2 hover:text-white">
                   <User className="h-4 w-4" />
                   {user.username}
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem asChild>
+                <DropdownMenuItem asChild className="hover:text-white">
                   <Link to="/profile">Profile</Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => logout()}>
+                <DropdownMenuItem onClick={() => logout()} className="hover:text-white">
                   Log out
                 </DropdownMenuItem>
               </DropdownMenuContent>

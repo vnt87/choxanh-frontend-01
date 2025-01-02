@@ -33,7 +33,7 @@ export function AuthDialog() {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         {user ? null : (
-          <Button variant="outline" className="text-foreground">
+          <Button variant="outline" className="hover:text-white">
             Login
           </Button>
         )}
@@ -60,13 +60,13 @@ export function AuthDialog() {
               placeholder="Enter your password"
             />
           </div>
-          <Button type="submit" className="w-full bg-[#1E7B3E] hover:bg-[#1E7B3E]/90">
+          <Button type="submit" className="w-full bg-[#1E7B3E] hover:bg-[#1E7B3E]/90 hover:text-white">
             Login
           </Button>
           <Button 
             type="button" 
             variant="outline" 
-            className="w-full text-foreground"
+            className="w-full hover:text-white"
             onClick={handleMicrosoftLogin}
           >
             Sign in with Microsoft
