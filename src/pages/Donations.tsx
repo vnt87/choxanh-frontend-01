@@ -1,5 +1,3 @@
-
-import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CharityProgress } from "@/components/CharityProgress";
 
@@ -7,7 +5,6 @@ export default function Donations() {
   return (
     <div className="min-h-screen bg-background p-4 transition-colors duration-200 flex flex-col">
       <div className="mx-auto max-w-7xl flex-grow">
-        <Header />
         <CharityProgress />
         
         <h1 className="text-2xl font-bold mb-6">Support Our Causes</h1>

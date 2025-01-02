@@ -24,23 +24,55 @@ export function CreateListingDialog({ onCreateListing, children }: CreateListing
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState<Category>("Other");
-  const [image, setImage] = useState("");
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [uploading, setUploading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const uploadImage = async (file: File) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'marketplace');
+    
+    const response = await fetch(
+      `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
+      {
+        method: 'POST',
+        body: formData,
+      }
+    );
+    
+    const data = await response.json();
+    return data.secure_url;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onCreateListing({
-      title,
-      description,
-      price: Number(price),
-      category,
-      image: image || "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
-    });
-    setOpen(false);
-    setTitle("");
-    setDescription("");
-    setPrice("");
-    setCategory("Other");
-    setImage("");
+    setUploading(true);
+    
+    try {
+      let imageUrl = "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b";
+      if (imageFile) {
+        imageUrl = await uploadImage(imageFile);
+      }
+      
+      onCreateListing({
+        title,
+        description,
+        price: Number(price),
+        category,
+        image: imageUrl,
+      });
+      
+      setOpen(false);
+      setTitle("");
+      setDescription("");
+      setPrice("");
+      setCategory("Other");
+      setImageFile(null);
+    } catch (error) {
+      console.error('Upload failed:', error);
+    } finally {
+      setUploading(false);
+    }
   };
 
   return (
@@ -99,17 +131,20 @@ export function CreateListingDialog({ onCreateListing, children }: CreateListing
             </Select>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="image">Image URL (optional)</Label>
+            <Label htmlFor="image">Image</Label>
             <Input
               id="image"
-              type="url"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-              placeholder="https://example.com/image.jpg"
+              type="file"
+              accept="image/*"
+              onChange={(e) => setImageFile(e.target.files?.[0] || null)}
             />
           </div>
-          <Button type="submit" className="w-full bg-green-600 hover:bg-green-700">
-            Create Listing
+          <Button 
+            type="submit" 
+            className="w-full bg-green-600 hover:bg-green-700"
+            disabled={uploading}
+          >
+            {uploading ? "Creating..." : "Create Listing"}
           </Button>
         </form>
       </DialogContent>

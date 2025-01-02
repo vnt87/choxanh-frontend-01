@@ -1,5 +1,4 @@
 import { useParams, Link } from "react-router-dom";
-import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 
@@ -9,8 +8,6 @@ export default function ListingDetail() {
   return (
     <div className="min-h-screen bg-background p-4 transition-colors duration-200 flex flex-col">
       <div className="mx-auto max-w-7xl flex-grow">
-        <Header />
-        
         <nav className="mb-6">
           <ol className="flex items-center space-x-2 text-sm">
             <li>

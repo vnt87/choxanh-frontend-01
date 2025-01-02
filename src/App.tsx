@@ -7,6 +7,9 @@ import Index from "./pages/Index";
 import ListingDetail from "./pages/ListingDetail";
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import Donations from "./pages/Donations";
+import { AuthProvider } from '@/contexts/AuthContext';
+import { RootLayout } from "./layout/RootLayout";
+import { Profile } from "@/pages/Profile";
 
 const queryClient = new QueryClient();
 
@@ -14,15 +17,22 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <ThemeProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/listing/:id" element={<ListingDetail />} />
-            <Route path="/donations" element={<Donations />} />
-          </Routes>
-        </BrowserRouter>
+        <AuthProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route
+                element={<RootLayout />}
+              >
+                <Route path="/" element={<Index />} />
+                <Route path="/listing/:id" element={<ListingDetail />} />
+                <Route path="/donations" element={<Donations />} />
+                <Route path="/profile" element={<Profile />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </AuthProvider>
       </ThemeProvider>
     </TooltipProvider>
   </QueryClientProvider>

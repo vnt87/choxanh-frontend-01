@@ -10,7 +10,6 @@ import logo from "@/assets/logo-gmk.svg";
 import { Progress } from "@/components/ui/progress";
 import { LoginDialog } from "@/components/auth/LoginDialog";
 import { RegisterDialog } from "@/components/auth/RegisterDialog";
-import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CharityProgress } from "@/components/CharityProgress";
 
@@ -76,7 +75,6 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background p-4 transition-colors duration-200 flex flex-col">
       <div className="mx-auto max-w-7xl flex-grow w-full">
-        <Header />
         <CharityProgress />
         <CategoryFilter
           selectedCategory={selectedCategory}

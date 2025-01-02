@@ -1,4 +1,4 @@
-import { Moon, Sun, Search } from "lucide-react";
+import { Moon, Sun, Search, User } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,10 +6,18 @@ import { CreateListingDialog } from "@/components/CreateListingDialog";
 import { AuthDialog } from "@/components/auth/AuthDialog";
 import logo from "@/assets/logo-gmk.svg";
 import { useTheme } from '@/contexts/ThemeContext';
+import { useAuth } from "@/contexts/AuthContext";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export function Header() {
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
+  const { user, logout } = useAuth();  // Add logout to destructuring
 
   return (
     <header className="mb-8 flex items-center justify-between">
@@ -63,12 +71,35 @@ export function Header() {
             <Sun className="h-4 w-4" />
           )}
         </Button>
-        <CreateListingDialog>
-          <Button className="gap-2 bg-green-600 hover:bg-green-700">
-            Start selling
-          </Button>
-        </CreateListingDialog>
-        <AuthDialog />
+        {user ? (
+          <>
+            {(user.role === 'seller' || user.role === 'admin') && (
+              <CreateListingDialog>
+                <Button className="gap-2 bg-green-600 hover:bg-green-700">
+                  Start selling
+                </Button>
+              </CreateListingDialog>
+            )}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="gap-2">
+                  <User className="h-4 w-4" />
+                  {user.username}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem asChild>
+                  <Link to="/profile">Profile</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => logout()}>
+                  Log out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </>
+        ) : (
+          <AuthDialog />
+        )}
       </div>
     </header>
   );
