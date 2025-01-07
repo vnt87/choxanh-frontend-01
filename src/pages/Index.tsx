@@ -52,6 +52,42 @@ const Index = () => {
       image: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9",
       createdAt: new Date("2024-02-18"),
     },
+    {
+      id: "5",
+      title: "Traditional Ao Dai",
+      description: "Handcrafted Vietnamese traditional dress with modern design elements.",
+      price: 450,
+      category: "Clothing",
+      image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b",
+      createdAt: new Date("2024-02-19"),
+    },
+    {
+      id: "6",
+      title: "Lacquer Art Box",
+      description: "Hand-painted lacquer jewelry box with mother of pearl inlay.",
+      price: 320,
+      category: "Art",
+      image: "https://images.unsplash.com/photo-1584589167171-541ce45f1eea",
+      createdAt: new Date("2024-02-20"),
+    },
+    {
+      id: "7",
+      title: "Vietnamese Cookbook",
+      description: "Collection of authentic Vietnamese recipes with step-by-step guides.",
+      price: 125,
+      category: "Books",
+      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
+      createdAt: new Date("2024-02-21"),
+    },
+    {
+      id: "8",
+      title: "Hand-Painted Silk Painting",
+      description: "Beautiful traditional Vietnamese silk painting featuring lotus flowers and birds.",
+      price: 275,
+      category: "Art",
+      image: "https://images.unsplash.com/photo-1578926375605-eaf7559b1458",
+      createdAt: new Date("2024-02-22"),
+    },
   ]);
   const { toast } = useToast();
 
